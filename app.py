@@ -4,7 +4,6 @@ from bson.objectid import ObjectId
 
 app = Flask(__name__)
 app.secret_key = "secret123"
-
 # MongoDB Connection
 client = MongoClient(
     "mongodb+srv://root:root@tech1.kglkjga.mongodb.net/?retryWrites=true&w=majority&appName=Tech1"
