@@ -1,125 +1,326 @@
-    <!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Admin Panel</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Admin Dashboard</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+
+body{
+    background:#f4f7fc;
+    font-family:'Segoe UI',sans-serif;
+}
+
+.sidebar{
+    position:fixed;
+    width:250px;
+    height:100vh;
+    background:#0f172a;
+    color:white;
+    padding:20px;
+}
+
+.sidebar h3{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.sidebar a{
+    display:block;
+    color:white;
+    text-decoration:none;
+    padding:12px;
+    border-radius:10px;
+    margin-bottom:10px;
+}
+
+.sidebar a:hover{
+    background:#1e293b;
+}
+
+.main{
+    margin-left:270px;
+    padding:25px;
+}
+
+.card-box{
+    border:none;
+    border-radius:15px;
+    box-shadow:0px 5px 15px rgba(0,0,0,0.1);
+}
+
+.table{
+    background:white;
+    border-radius:15px;
+    overflow:hidden;
+}
+
+.section-title{
+    margin-bottom:15px;
+    font-weight:600;
+}
+
+</style>
+
 </head>
+
 <body>
 
-<h2>Admin Panel</h2>
+<div class="sidebar">
 
-<hr>
+    <h3>
+        <i class="fa-solid fa-list-check"></i>
+        TaskFlow
+    </h3>
 
-<h3>Add User</h3>
+    <a href="#dashboard">
+        <i class="fa-solid fa-gauge"></i>
+        Dashboard
+    </a>
 
-<form action="/add_user" method="post">
+    <a href="#users">
+        <i class="fa-solid fa-users"></i>
+        Users
+    </a>
 
-    <input type="text"
-           name="username"
-           placeholder="Username"
-           required>
+    <a href="#tasks">
+        <i class="fa-solid fa-list-check"></i>
+        Tasks
+    </a>
 
-    <input type="password"
-           name="password"
-           placeholder="Password"
-           required>
+    <a href="/logout">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        Logout
+    </a>
 
-    <button type="submit">
-        Add User
-    </button>
+</div>
 
-</form>
+<div class="main">
 
-<hr>
-<h3>Create Task</h3>
-<form action="/create_task" method="post">
+    <h2 class="mb-4" id="dashboard">
+        Admin Dashboard
+    </h2>
 
-    <input type="text"
-           name="title"
-           placeholder="Task Title"
-           required>
+    <div class="row mb-4">
 
-    <input type="text"
-           name="assigned_to"
-           placeholder="Employee Username"
-           required>
+        <div class="col-md-4">
 
-    <select name="priority">
-        <option value="High">High</option>
-        <option value="Medium">Medium</option>
-        <option value="Low">Low</option>
-    </select>
+            <div class="card card-box p-3">
 
-    <input type="date"
-           name="due_date"
-           required>
+                <h6>Total Users</h6>
 
-    <button type="submit">
-        Create Task
-    </button>
+                <h2>{{ users|length }}</h2>
 
-</form>
+            </div>
 
-</form>
+        </div>
 
-<hr>
-<h3>All Users</h3>
+        <div class="col-md-4">
 
-<table border="1">
+            <div class="card card-box p-3">
 
-<tr>
-    <th>Username</th>
-    <th>Role</th>
-    <th>Action</th>
-</tr>
+                <h6>Total Tasks</h6>
 
-{% for user in users %}
+                <h2>{{ tasks|length }}</h2>
 
-<tr>
-    <td>{{ user.username }}</td>
-    <td>{{ user.role }}</td>
+            </div>
 
-    <td>
+        </div>
 
-        <form action="/delete_user" method="post">
+        <div class="col-md-4">
 
-            <input type="hidden"
-                   name="username"
-                   value="{{ user.username }}">
+            <div class="card card-box p-3">
 
-            <button type="submit">
-                Delete
-            </button>
+                <h6>System Status</h6>
 
-        </form>
+                <h2>Active</h2>
 
-    </td>
+            </div>
 
-</tr>
+        </div>
 
-{% endfor %}
+    </div>
 
-</table>
-<h3>All Tasks</h3>
+    <div class="row">
 
-<table border="1">
+        <div class="col-md-6">
 
-<tr>
-    <th>Task</th>
-    <th>Assigned To</th>
-    <th>Status</th>
-</tr>
+            <div class="card card-box p-4">
 
-{% for task in tasks %}
+                <h4 class="section-title">
+                    <i class="fa-solid fa-user-plus"></i>
+                    Add Employee
+                </h4>
 
-<tr>
-    <td>{{ task.title }}</td>
-    <td>{{ task.assigned_to }}</td>
-    <td>{{ task.status }}</td>
-</tr>
+                <form action="/add_user" method="post">
 
-{% endfor %}
+                    <input type="text"
+                           class="form-control mb-3"
+                           name="username"
+                           placeholder="Username"
+                           required>
 
-</table>
+                    <input type="password"
+                           class="form-control mb-3"
+                           name="password"
+                           placeholder="Password"
+                           required>
+
+                    <button class="btn btn-primary">
+                        Add User
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-6">
+
+            <div class="card card-box p-4">
+
+                <h4 class="section-title">
+                    <i class="fa-solid fa-square-plus"></i>
+                    Create Task
+                </h4>
+
+                <form action="/create_task" method="post">
+
+                    <input type="text"
+                           class="form-control mb-3"
+                           name="title"
+                           placeholder="Task Title"
+                           required>
+
+                    <input type="text"
+                           class="form-control mb-3"
+                           name="assigned_to"
+                           placeholder="Employee Username"
+                           required>
+
+                    <select name="priority"
+                            class="form-select mb-3">
+
+                        <option>High</option>
+                        <option>Medium</option>
+                        <option>Low</option>
+
+                    </select>
+
+                    <input type="date"
+                           name="due_date"
+                           class="form-control mb-3"
+                           required>
+
+                    <button class="btn btn-success">
+                        Create Task
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <br>
+
+    <div class="card card-box p-4 mb-4">
+
+        <h4 class="section-title" id="users">
+            <i class="fa-solid fa-users"></i>
+            Employee List
+        </h4>
+
+        <table class="table table-bordered">
+
+            <tr>
+                <th>Username</th>
+                <th>Role</th>
+                <th>Action</th>
+            </tr>
+
+            {% for user in users %}
+
+            <tr>
+
+                <td>{{ user.username }}</td>
+
+                <td>{{ user.role }}</td>
+
+                <td>
+
+                    <form action="/delete_user" method="post">
+
+                        <input type="hidden"
+                               name="username"
+                               value="{{ user.username }}">
+
+                        <button class="btn btn-danger btn-sm">
+
+                            Delete
+
+                        </button>
+
+                    </form>
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+    </div>
+
+    <div class="card card-box p-4">
+
+        <h4 class="section-title" id="tasks">
+            <i class="fa-solid fa-list-check"></i>
+            Task List
+        </h4>
+
+        <table class="table table-bordered">
+
+            <tr>
+
+                <th>Task</th>
+                <th>Assigned To</th>
+                <th>Status</th>
+                <th>Priority</th>
+                <th>Due Date</th>
+
+            </tr>
+
+            {% for task in tasks %}
+
+            <tr>
+
+                <td>{{ task.title }}</td>
+                <td>{{ task.assigned_to }}</td>
+                <td>{{ task.status }}</td>
+                <td>{{ task.priority }}</td>
+                <td>{{ task.due_date }}</td>
+
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+    </div>
+
+</div>
 
 </body>
 </html>
