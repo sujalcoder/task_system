@@ -23,170 +23,136 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 }
 
 body{
-
-    background:
-    linear-gradient(
-    rgba(15,23,42,0.80),
-    rgba(15,23,42,0.80)
-    );
-
-    background-size:cover;
-    background-position:center;
-    background-attachment:fixed;
-
+    background:#0f172a;
     min-height:100vh;
-
     font-family:'Segoe UI',sans-serif;
+    color:white;
 }
+
+/* Banner */
 
 .hero-card{
-
+    background:#1e293b;
     border:none;
-
-    border-radius:25px;
-
+    border-radius:20px;
     overflow:hidden;
-
-    background:rgba(255,255,255,0.10);
-
-    backdrop-filter:blur(15px);
-
-    box-shadow:0 15px 40px rgba(0,0,0,0.3);
-
-    color:white;
-}
-
-.hero-image{
-
-    height:280px;
-
-    width:100%;
-
-    object-fit:cover;
-}
-
-.stats-card{
-
-    background:rgba(255,255,255,0.10);
-
-    backdrop-filter:blur(15px);
-
-    border:none;
-
-    border-radius:20px;
-
-    color:white;
-
-    box-shadow:0 10px 25px rgba(0,0,0,0.25);
-
-    transition:.3s;
-}
-
-.stats-card:hover{
-
-    transform:translateY(-5px);
-}
-
-.task-card{
-
-    background:rgba(255,255,255,0.10);
-
-    backdrop-filter:blur(15px);
-
-    border:none;
-
-    border-radius:20px;
-
-    color:white;
-
     box-shadow:0 10px 30px rgba(0,0,0,0.3);
 }
 
-.table{
+.hero-image{
+    width:100%;
+    height:280px;
+    object-fit:cover;
+}
 
+.hero-content{
+    padding:30px;
+    color:white;
+}
+
+/* Stats Cards */
+
+.stats-card{
+    background:#1e293b;
+    border:none;
+    border-radius:18px;
+    color:white;
+    box-shadow:0 8px 20px rgba(0,0,0,0.25);
+    transition:0.3s;
+}
+
+.stats-card:hover{
+    transform:translateY(-5px);
+}
+
+.stats-icon{
+    font-size:35px;
+    margin-bottom:10px;
+}
+
+/* Task Section */
+
+.task-card{
+    background:#1e293b;
+    border:none;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,0.3);
+}
+
+.card-header{
+    background:#2563eb !important;
+    border:none;
+}
+
+/* Table */
+
+.table{
     color:white;
 }
 
 .table th{
-
-    background:rgba(13,110,253,0.9) !important;
-
+    background:#2563eb !important;
     color:white;
+    border:none;
 }
 
 .table td{
-
-    background:transparent !important;
-
+    background:#1e293b !important;
     color:white;
+    border-color:#334155;
 }
+
+/* Status Badges */
 
 .status-pending{
-
-    background:#ffc107;
-
-    color:black;
-
-    padding:8px 14px;
-
-    border-radius:20px;
-
-    font-weight:bold;
-}
-
-.status-progress{
-
-    background:#0dcaf0;
-
+    background:#f59e0b;
     color:white;
-
-    padding:8px 14px;
-
+    padding:8px 15px;
     border-radius:20px;
-
-    font-weight:bold;
-}
-
-.status-completed{
-
-    background:#198754;
-
-    color:white;
-
-    padding:8px 14px;
-
-    border-radius:20px;
-
-    font-weight:bold;
-}
-
-.form-select{
-
-    min-width:180px;
-}
-
-.btn-update{
-
-    min-width:100px;
-}
-
-.logout-btn{
-
-    padding:10px 20px;
-
     font-weight:600;
 }
 
-.text-muted{
-
-    color:#d1d5db !important;
+.status-progress{
+    background:#3b82f6;
+    color:white;
+    padding:8px 15px;
+    border-radius:20px;
+    font-weight:600;
 }
 
-.section-title{
-
+.status-completed{
+    background:#22c55e;
     color:white;
+    padding:8px 15px;
+    border-radius:20px;
+    font-weight:600;
+}
 
-    font-weight:700;
+/* Inputs */
+
+.form-select{
+    background:#334155;
+    color:white;
+    border:none;
+}
+
+.form-select option{
+    background:#334155;
+}
+
+.form-select:focus{
+    background:#334155;
+    color:white;
+    box-shadow:none;
+}
+
+.btn-update{
+    min-width:100px;
+}
+
+.text-muted{
+    color:#cbd5e1 !important;
 }
 
 </style>
@@ -195,17 +161,17 @@ body{
 
 <body>
 
-<div class="container py-5">
+<div class="container py-4">
 
 ```
-<!-- Welcome Banner -->
+<!-- Banner -->
 
 <div class="card hero-card mb-4">
 
-    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1600"
+    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=1600"
          class="hero-image">
 
-    <div class="card-body">
+    <div class="hero-content">
 
         <div class="d-flex justify-content-between align-items-center">
 
@@ -213,13 +179,13 @@ body{
 
                 <h1 class="fw-bold">
 
-                    Welcome Back, {{ username }} 👋
+                    Welcome, {{ username }} 👋
 
                 </h1>
 
-                <p class="text-muted fs-5">
+                <p class="text-muted">
 
-                    Manage your tasks, update progress and stay productive.
+                    View assigned tasks, track progress and update your work status.
 
                 </p>
 
@@ -228,10 +194,9 @@ body{
             <div>
 
                 <a href="/logout"
-                   class="btn btn-danger logout-btn">
+                   class="btn btn-danger px-4">
 
                     <i class="fa-solid fa-right-from-bracket"></i>
-
                     Logout
 
                 </a>
@@ -244,18 +209,19 @@ body{
 
 </div>
 
-<!-- Stats Cards -->
+<!-- Stats -->
 
 <div class="row mb-4">
 
     <div class="col-md-4">
 
-        <div class="card stats-card p-4">
+        <div class="card stats-card p-4 border-start border-4 border-primary">
 
-            <h6>
+            <div class="stats-icon text-primary">
                 <i class="fa-solid fa-list-check"></i>
-                Total Tasks
-            </h6>
+            </div>
+
+            <h6>Total Tasks</h6>
 
             <h2>{{ tasks|length }}</h2>
 
@@ -265,12 +231,13 @@ body{
 
     <div class="col-md-4">
 
-        <div class="card stats-card p-4">
+        <div class="card stats-card p-4 border-start border-4 border-success">
 
-            <h6>
+            <div class="stats-icon text-success">
                 <i class="fa-solid fa-user"></i>
-                Role
-            </h6>
+            </div>
+
+            <h6>Role</h6>
 
             <h2>Employee</h2>
 
@@ -280,12 +247,13 @@ body{
 
     <div class="col-md-4">
 
-        <div class="card stats-card p-4">
+        <div class="card stats-card p-4 border-start border-4 border-warning">
 
-            <h6>
+            <div class="stats-icon text-warning">
                 <i class="fa-solid fa-circle-check"></i>
-                Status
-            </h6>
+            </div>
+
+            <h6>Status</h6>
 
             <h2>Active</h2>
 
@@ -295,13 +263,13 @@ body{
 
 </div>
 
-<!-- Task Table -->
+<!-- Tasks -->
 
 <div class="card task-card">
 
-    <div class="card-header bg-primary">
+    <div class="card-header text-white">
 
-        <h4 class="mb-0 text-white">
+        <h4 class="mb-0">
 
             <i class="fa-solid fa-list-check"></i>
 
@@ -322,9 +290,7 @@ body{
                 <tr>
 
                     <th>Task</th>
-
                     <th>Status</th>
-
                     <th>Update Status</th>
 
                 </tr>
@@ -440,6 +406,4 @@ body{
 </div>
 
 </body>
-
 </html>
---
